@@ -1,0 +1,48 @@
+type Query {
+  allDevices: [Device!]!
+  device(deviceID: ID!): Device
+  devicesByUser(userID: ID!): [Device!]!
+  allUsers: [User!]!
+}
+
+type Mutation {
+  createDevice(name: String!, userID: ID): Device
+  updateDevice(data: DeviceDataUpdate, deviceID: ID!): Device
+  removeDevice(deviceID: ID!): Boolean
+  createUser(name: String!, email: String!): User
+  removeUser(userID: ID!): Boolean
+  toggleDeviceStatus(deviceID: ID!, status: Status!): Device
+}
+
+type Subscription {
+  onDeviceUpdate: DeviceUpdateSubscription!
+}
+
+input DeviceDataUpdate {
+  name: String
+  status: Status
+}
+
+type DeviceUpdateSubscription {
+  id: ID
+  status: Status
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String!
+  devices: [Device]!
+}
+
+type Device {
+  id: ID!
+  name: String!
+  status: Status
+  owner: User!
+}
+
+enum Status {
+  ONLINE
+  OFFLINE
+}

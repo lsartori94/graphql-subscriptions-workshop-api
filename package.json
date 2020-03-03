@@ -1,0 +1,31 @@
+{
+  "name": "workshop-graphql-subscriptions-api",
+  "version": "1.0.0",
+  "description": "Workshop of GraphQL subscriptions",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./server.js",
+    "kill": "npm run stop && npm run remove",
+    "up": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "remove": "docker-compose rm",
+    "init": "npm run update && npm run populate",
+    "update": "prisma deploy && prisma generate",
+    "populate": "node ./populate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.corp.globant.com:luca-sartori/workshop-graphql-subscriptions-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3",
+    "nodemon": "^2.0.2",
+    "prisma-client-lib": "^1.34.10"
+  },
+  "devDependencies": {
+    "prisma": "^1.34.10"
+  }
+}

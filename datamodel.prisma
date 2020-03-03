@@ -1,0 +1,25 @@
+type Device {
+  id: ID! @id
+  name: String!
+  status: Status @default(value: OFFLINE)
+  owner: User
+}
+
+type User {
+  id: ID! @id
+  name: String!
+  lastname: String
+  email: String! @unique
+  role: Role! @default(value: USER)
+  devices: [Device] @relation(link: INLINE)
+}
+
+enum Status {
+  ONLINE
+  OFFLINE
+}
+
+enum Role {
+  USER
+  ADMIN
+}
